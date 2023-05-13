@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+        <script
+            src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"
+            target="_blank"
+        ></script>
+        <script
+            src="https://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v4.0.1/dist/aframe-physics-system.min.js"
+            target="_blank"
+        ></script>
+        <script src="https://recast-api.donmccurdy.com/aframe-inspector-plugin-recast.js"></script>
+        <script src="./js/Control.js"></script>
+        <script src="./js/Gameplay.js"></script>
+    </head>
+    <body>
+        <a-scene inspector-plugin-recast="serviceURL: http://127.0.0.1:5500/">
+            <a-assets>
+                <img id="moon" src="./assets/moon.jpg" />
+                <a-asset-item id="rocket" src="./assets/rocket/scene.gltf"></a-asset-item>
+                <a-asset-item id="rover" src="./assets/rover/scene.gltf"></a-asset-item>
+                <a-asset-item id="hill" src="./assets/hill/scene.gltf"></a-asset-item>
+            </a-assets>
+            <a-entity id="camera" camera position="0 15 40" wasd-controls="acceleration: 400" look-controls="pointerLockEnabled: false;" control rover="false" hill="false" tasks="2" gameplay>
+                <a-entity
+                    id="over"
+                    position="8 0 -10"
+                    text="
+                        font: monoid;
+                        color: white;
+                        width: 20;
+                        height: 20;
+                        value: Game Over;
+                    "
+                    visible="false"
+                ></a-entity>
+                <a-entity
+                    id="timer"
+                    position="-5 7 -10"
+                    text="
+                        font: monoid;
+                        color: white;
+                        width: 20;
+                        height: 20;
+                        value: Time: 45;
+                    "
+                ></a-entity>
+                <a-entity
+                    id="tasks"
+                    position="16.5 7 -10"
+                    text="
+                        font: monoid;
+                        color: white;
+                        width: 20;
+                        height: 20;
+                        value: Tasks Remaining: 2;
+                    "
+                ></a-entity>
+            </a-entity>
+            <a-sky color="black"></a-sky>
+            <a-entity id="surface">
+                <a-plane position="0 -2 0" src="#moon" scale="1000 1000 1000" rotation="-90 0 0"></a-plane>
+                <a-entity position="0 1665 3890" gltf-model="#rocket" scale="10 10 10"></a-entity>
+                <a-entity position="150 5 -50" gltf-model="#hill" scale="0.02 0.05 0.02"></a-entity>
+                <a-entity
+                    position="150 60 -5"
+                    rotation="0 -90 0"
+                    text="
+                        font: monoid;
+                        color: white;
+                        width: 100;
+                        height: 100;
+                        value: Collect Hill Samples;
+                    "
+                ></a-entity>
+                <a-entity position="-100 0 0" gltf-model="#rover" scale="3 3 3"></a-entity>
+                <a-entity
+                    position="-75 60 -5"
+                    rotation="0 90 0"
+                    text="
+                        font: monoid;
+                        color: white;
+                        width: 100;
+                        height: 100;
+                        value: Get Data from Rover;
+                    "
+                ></a-entity>
+            </a-entity>
+        </a-scene>
+    </body>
+</html>
